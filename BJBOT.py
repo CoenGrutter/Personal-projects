@@ -227,9 +227,11 @@ def hit():
     time.sleep(1)
     pyautogui.click(x=x_coord, y=y_coord)
 
+    #todo: to fix if we dont know if we busted afer a hit, we can make a screenshot of a certain position.
+    #when we bust, it will turn red. so make a screenshot, check if its red, then proceed accordingly.
 
     #then sleep while dealer deals cards
-    time.sleep(2)
+    time.sleep(0.5)
 
 
 def stand():
