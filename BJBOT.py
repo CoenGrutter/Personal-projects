@@ -146,7 +146,7 @@ def read_hand(amount_of_cards):
         # Take a screenshot using pyautogui
         left = 900  # X-coordinate of the left edge
         top = 590  # Y-coordinate of the top edge
-        width = 33  # Width of the region
+        width = 35  # Width of the region
         height = 38  # Height of the region
 
         # Capture the screenshot of the specified region
@@ -168,7 +168,7 @@ def read_hand(amount_of_cards):
         # Take a screenshot using pyautogui
         left = 935  # X-coordinate of the left edge
         top = 590  # Y-coordinate of the top edge
-        width = 33  # Width of the region
+        width = 35  # Width of the region
         height = 38  # Height of the region
 
 
@@ -187,7 +187,7 @@ def read_hand(amount_of_cards):
         print("we got a third card!")
         left = 955  # X-coordinate of the left edge
         top = 590  # Y-coordinate of the top edge
-        width = 33  # Width of the region
+        width = 35  # Width of the region
         height = 38  # Height of the region
 
         # Capture the screenshot of the specified region
@@ -339,9 +339,6 @@ while True:
                     hit()
                     amount_of_cards = amount_of_cards + 1
                     time.sleep(2)
-                    game_in_progress =  False
-                   #for now we will have to break it here, because we are not actualy hitting a card yet, so it will continiously read the same thing, and continiously tell it to hit
-
                 elif(decision =='Stand'):
                     print("were standing! the game is over! next one please!")
                     stand()
@@ -356,6 +353,14 @@ while True:
                     game_in_progress = False
                     time.sleep(5)
                     print(decision)
+
+
+
+
+
+
+
+
 
 
 
