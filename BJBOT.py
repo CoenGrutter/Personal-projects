@@ -113,98 +113,95 @@ def blackjack_decision(player_cards, dealer_upcard, can_double):
 
 
 
+def what_card_is_this(text):
+    if text == 'A':
+        Ace_card = Card('A', 11)
+        return Ace_card
+    elif text == 'K':
+        King_card = Card('K', 10)
+        return King_card
+    elif text == 'Q':
+        Queen_card = Card('Q', 10)
+        return Queen_card
+    elif text == 'J':
+        Jack_card = Card('J', 10)
+        return Jack_card
+    elif text == '1':
+        print("we have a 1, which is not possible, unless we have a 10. so this has to be a 10")
+        Ten_card = Card('T', 10)
+        return Ten_card
+    else:
+        Any_card = Card(text, int(text))
+        return Any_card
 
 
 
 def read_hand(amount_of_cards):
-
+    custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=1023456789AJKQ'
     player_cards = []
 
     #card 1:
     pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+    if(amount_of_cards==2):
+        # Take a screenshot using pyautogui
+        left = 900  # X-coordinate of the left edge
+        top = 590  # Y-coordinate of the top edge
+        width = 33  # Width of the region
+        height = 38  # Height of the region
 
-    # Take a screenshot using pyautogui
-    left = 900  # X-coordinate of the left edge
-    top = 567  # Y-coordinate of the top edge
-    width = 33  # Width of the region
-    height = 33  # Height of the region
+        # Capture the screenshot of the specified region
+        screenshot = pyautogui.screenshot(region=(left, top, width, height))
 
-    # Capture the screenshot of the specified region
-    screenshot = pyautogui.screenshot(region=(left, top, width, height))
-
-    screenshot.save("card 1.png")
-
-    custom_config = r'--oem 3 --psm 6 -c tessedit_char_whitelist=1023456789AJKQ'
-
-
-    text = pytesseract.image_to_string(screenshot, config=custom_config).strip()  # Remove leading/trailing whitespace
-    print("raw text found:", text)
-    text = text.replace('\n', '')
-    print("card 1 text found: ", repr(text))
-    if text == 'A':
-        Ace_card = Card('A', 11)
-        player_cards.append(Ace_card)
-    elif text == 'K':
-        King_card = Card('K', 10)
-        player_cards.append(King_card)
-    elif text == 'Q':
-        Queen_card = Card('Q', 10)
-        player_cards.append(Queen_card)
-    elif text == 'J':
-        Jack_card = Card('J', 10)
-        player_cards.append(Jack_card)
-    elif text == '1':
-        print("we have a 1, which is not possible, unless we have a 10. so this has to be a 101")
-        Ten_card = Card('T', 10)
-        player_cards.append(Ten_card)
-    else:
-        Any_card = Card(text, int(text))
-        player_cards.append(Any_card)
-
-    #card 2:
-
-    #todo, adjust these coords to get the 2nd card.
-    # Take a screenshot using pyautogui
-    left = 925  # X-coordinate of the left edge
-    top = 567  # Y-coordinate of the top edge
-    width = 33  # Width of the region
-    height = 33  # Height of the region
-
-
-    # Capture the screenshot of the specified region
-    screenshot = pyautogui.screenshot(region=(left, top, width, height))
-
-    screenshot.save("card 2.png")
-
-
-    text = pytesseract.image_to_string(screenshot, config=custom_config).strip()  # Remove leading/trailing whitespace
-    text = text.replace('\n', '')
-    print("card 2 text found: ", text )
-    if text == 'A':
-        Ace_card = Card('A', 11)
-        player_cards.append(Ace_card)
-    elif text == 'K':
-        King_card = Card('K', 10)
-        player_cards.append(King_card)
-    elif text == 'Q':
-        Queen_card = Card('Q', 10)
-        player_cards.append(Queen_card)
-    elif text == 'J':
-        Jack_card = Card('J', 10)
-        player_cards.append(Jack_card)
-    elif text == '1':
-        print("we have a 1, which is not possible, unless we have a 10. so this has to be a 101")
-        Ten_card = Card('T', 10)
-        player_cards.append(Ten_card)
-    else:
-        Any_card = Card(text, int(text  ))
-        player_cards.append(Any_card)
+        screenshot.save("card 1.png")
 
 
 
-    if(amount_of_cards == 3):
-        #code to read a third hand and add it to player cards.
+
+        text = pytesseract.image_to_string(screenshot, config=custom_config).strip()  # Remove leading/trailing whitespace
+        print("card 1 text found:", text)
+        text = text.replace('\n', '')
+        player_cards.append(what_card_is_this(text))
+
+        #card 2:
+
+
+        # Take a screenshot using pyautogui
+        left = 935  # X-coordinate of the left edge
+        top = 590  # Y-coordinate of the top edge
+        width = 33  # Width of the region
+        height = 38  # Height of the region
+
+
+        # Capture the screenshot of the specified region
+        screenshot = pyautogui.screenshot(region=(left, top, width, height))
+
+        screenshot.save("card 2.png")
+
+
+        text = pytesseract.image_to_string(screenshot, config=custom_config).strip()  # Remove leading/trailing whitespace
+        text = text.replace('\n', '')
+        print("card 2 text found: ", text )
+        player_cards.append(what_card_is_this(text))
+
+    elif(amount_of_cards == 3):
         print("we got a third card!")
+        left = 955  # X-coordinate of the left edge
+        top = 590  # Y-coordinate of the top edge
+        width = 33  # Width of the region
+        height = 38  # Height of the region
+
+        # Capture the screenshot of the specified region
+        screenshot = pyautogui.screenshot(region=(left, top, width, height))
+
+        screenshot.save("card 3.png")
+
+        text = pytesseract.image_to_string(screenshot, config=custom_config).strip()  # Remove leading/trailing whitespace
+        text = text.replace('\n', '')
+        print("card 3 text found: ", text)
+        player_cards.append(what_card_is_this(text))
+
+
+
     return player_cards
 
 
@@ -224,18 +221,44 @@ def any_blackjacks( ):
 
 
 def hit():
+    x_coord = 702
+    y_coord = 939
 
-    return 0
+    time.sleep(1)
+    pyautogui.click(x=x_coord, y=y_coord)
+
+
+    #then sleep while dealer deals cards
+    time.sleep(2)
+
+
 def stand():
     #a function to stand
+    x_coord=971
+    y_coord=918
+
+    time.sleep(1)
+    pyautogui.click(x=x_coord, y=y_coord)
+
+
     return 0
 def double_down():
     #a function to double down
+    x_coord = 1007
+    y_coord = 730
+    time.sleep(1)
+    pyautogui.click(x=x_coord, y=y_coord)
+
+    time.sleep(2)
     return 0
 
 def make_bet():
+    x_coord = 702
+    y_coord = 939
 
-    #code to click the bet button
+    time.sleep(1)
+    pyautogui.click(x=x_coord, y=y_coord)
+
 
     #then sleep while dealer deals cards
     time.sleep(2)
@@ -243,10 +266,14 @@ def make_bet():
 
 while True:
     print("we start heere!")
+    time.sleep(3)
     player_cards = []
 
     game_in_progress = True
+    can_double = True
+    can_split = True
     make_bet()
+    time.sleep(2)
 
 
     #code to start a game, aka make a bet.
@@ -259,16 +286,15 @@ while True:
         game_in_progress = False
         time.sleep(2)
     else:
-        can_split = True
 
         def dealercard():
 
             time.sleep(2)
             # Take a screenshot using pyautogui
             left = 902  # X-coordinate of the left edge
-            top = 295  # Y-coordinate of the top edge
+            top = 308  # Y-coordinate of the top edge
             width = 30  # Width of the region
-            height = 33  # Height of the region
+            height = 35  # Height of the region
 
             # Capture the screenshot of the specified region
             screenshot = pyautogui.screenshot(region=(left, top, width, height))
@@ -279,26 +305,8 @@ while True:
             text = pytesseract.image_to_string(screenshot,config=custom_config).strip()  # Remove leading/trailing whitespace
             text = text.replace('\n', '')
             print("dealer card found: ", text)
-            if text == 'A':
-                Ace_card = Card('A', 11)
-                return Ace_card
-            elif text == 'K':
-                King_card = Card('K', 10)
-                return King_card
+            return what_card_is_this(text)
 
-            elif text == 'Q':
-                Queen_card = Card('Q', 10)
-                return Queen_card
-            elif text == 'J':
-                Jack_card = Card('J', 10)
-                return Jack_card
-            elif text == '1':
-                print("we have a 1, which is not possible, unless we have a 10. so this has to be a 101")
-                Ten_card = Card('T', 10)
-                return Ten_card
-            else:
-                Any_card = Card(text, int(text))
-                return Any_card
 
 
 
@@ -306,9 +314,14 @@ while True:
         dealer_value = dealercard().card_value
 
         amount_of_cards = 2
-        while game_in_progress:
 
-            player_cards = read_hand(amount_of_cards)
+        while game_in_progress:
+            if(amount_of_cards==2):
+                player_cards = read_hand(amount_of_cards)
+            else:
+                player_cards2  = read_hand(amount_of_cards)
+                player_cards.extend(player_cards2)
+
             if(total_value2(player_cards) >21):
                 game_in_progress = False
             else:
@@ -330,12 +343,18 @@ while True:
                    #for now we will have to break it here, because we are not actualy hitting a card yet, so it will continiously read the same thing, and continiously tell it to hit
 
                 elif(decision =='Stand'):
+                    print("were standing! the game is over! next one please!")
+                    stand()
+                    time.sleep(5)
                     game_in_progress = False
                 elif(decision =='Double Down'):
                     #some shit to double down
+                    double_down()
+                    time.sleep(5)
                     game_in_progress = False
                 else:
                     game_in_progress = False
+                    time.sleep(5)
                     print(decision)
 
 
